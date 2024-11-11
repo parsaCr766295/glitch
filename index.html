@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-maze-component@0.1.25/dist/aframe-maze-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene physics="debug: false">
+      <a-assets>
+        <img crossorigin="anonymous" id="concreteTexture" src="https://cdn.glitch.com/bc2d1210-ed15-482e-8ef4-21e7386cc119%2Fconcrete.jpg?1554114070251" />
+        <img crossorigin="anonymous" id="concreteAmbientTexture" src="https://cdn.glitch.com/bc2d1210-ed15-482e-8ef4-21e7386cc119%2Fconcrete_ambient.jpg?1554114070125" />
+        <img crossorigin="anonymous" id="concreteNormalTexture" src="https://cdn.glitch.com/bc2d1210-ed15-482e-8ef4-21e7386cc119%2Fconcrete_normal.jpg?1554114070301" />
+
+        <img crossorigin="anonymous" id="grassTexture" src="https://cdn.glitch.com/bc2d1210-ed15-482e-8ef4-21e7386cc119%2Fgrass.jpg?1554111148820" />
+        <img crossorigin="anonymous" id="grassAmbientTexture" src="https://cdn.glitch.com/bc2d1210-ed15-482e-8ef4-21e7386cc119%2Fgrass_ambient.jpg?1554111148794" />
+        <img crossorigin="anonymous" id="grassNormalTexture" src="https://cdn.glitch.com/bc2d1210-ed15-482e-8ef4-21e7386cc119%2Fgrass_normal.jpg?1554111149688" />
+        <img crossorigin="anonymous" id="grassBumpTexture" src="https://cdn.glitch.com/bc2d1210-ed15-482e-8ef4-21e7386cc119%2Fgrass_bump.jpg?1554111149766" />
+      </a-assets>
+      <a-entity environment="preset: starry; shadow: true; lighting: none; ground: none; grid: none"></a-entity>
+      <a-entity light="type: directional; color: #4a2b05; intensity: 0.3; castShadow: true;" position="0 -10 -460"></a-entity>
+      <a-entity id="rig" movement-controls kinematic-body position="0 0 0">
+          <a-entity camera
+                    position="0 1.6 0"
+                    look-controls
+                    >
+            <a-entity
+              light="type: spot; castShadow: true; intensity: 1; angle: 30; distance: 20; penumbra: .1;"
+              position="0 -0.6 0"
+            ></a-entity>
+          </a-entity>
+      </a-entity>
+      <a-box id="theThing" height="6" position="0 3 0" shadow static-body
+          velocity="0 0 0"
+          material="normalMap: #concreteNormalTexture; normalTextureRepeat: 1 6; src: #concreteTexture; repeat: 1 6; ambientOcclusionMap: #concreteAmbientTexture; ambientOcclusionTextureRepeat: 1 6;"
+          color="#666"></a-box>
+      <script>
+      </script>
+      <a-plane
+        shadow="cast: false"
+        material="normalMap: #grassNormalTexture; normalTextureRepeat: 400 400; repeat: 400 400; displacementMap: #grassBumpTexture; displacementTextureRepeat: 400 400; src: #grassTexture; ambientOcclusionMap: #grassAmbientTexture; ambientOcclusionTextureRepeat: 400 400;"
+        static-body id="plane" position="0 0 0" rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
+    </a-scene>
+  </body>
+</html>
